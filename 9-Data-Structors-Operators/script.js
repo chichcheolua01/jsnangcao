@@ -1,25 +1,29 @@
 "use strict";
 
+const weekdays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+
+  //ES6 enchanced object literals
+  openingHours,
 
   order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]; // this.starterMenu thay thế cho restaurant.starterMenu
@@ -48,6 +52,89 @@ const restaurant = {
   },
 };
 
+//OPTIONAL CHAINING
+if (restaurant.openingHours.mon) {
+  console.log(console.log(restaurant.openingHours.mon));
+}
+
+//WITH optinal chaining
+console.log(restaurant.openingHours.mon?.open); //? kiểm tra rằng phía trước ? có tồn tại hay ko
+
+/* 
+//-- FOR LOOP AND ENTRIES --
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+for (const [item, element] of menu.entries()) {
+  //entries lấy giá trị của biến và index của biến cho vào 1 mảng 2 phần tử
+  console.log(`${item + 1}: ${element}`);
+}
+
+//console.log([...menu.entries()]);
+
+*/
+
+/* 
+//-- TOÁN TỬ ||= VÀ &&= --
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const rest1 = {
+  name: "Capri",
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: "La Piazaa",
+  owner: "Giovanni Rossi",
+};
+// OR assignment operator
+//rest1.numGuests = rest1.numGuests || 10;
+//rest2.numGuests = rest2.numGuests || 10;
+
+//rest1.numGuests ||= 10; // rest1.numGuests = rest1.numGuests || 10; numGuest = 10
+//rest2.numGuests ||= 10; // rest2.numGuests = rest2.numGuests || 10; numGuest = 10
+
+//nullish assignment operator (null or undefined)
+rest1.numGuests ??= 10; // numGuest = 0 (vì ?? coi 0 và '' là 2 giá trị đúng)
+rest2.numGuests ??= 10; //
+
+// rest1.owner = rest1.owner && "<ANONYMOUS>";
+// rest2.owner = rest2.owner && "<ANONYMOUS>";
+console.log(rest1); // rest1.owner: undefined (vì rest1 ko có owner, nên với toán tử && sẽ nhận giá trị sai đầu tiên)
+console.log(rest2); // rest2.owner: <ANONYMOUS>
+
+console.log(rest1);
+console.log(rest2);
+
+rest1.owner &&= '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>';
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+*/
+
+/* 
+//-- ?? Nullish oporator --
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+restaurant.numGuest = 0;
+const guest = restaurant.numGuest || 10; // nếu numGuest tồn tại, giá trị của guest1 = numGuest; ngược lại = 10;
+console.log(guest); // 23
+
+// Nullish: null and undefined (NOT 0 or '') - ?? coi 0 và '' là giá trị đúng
+const guestCorrect = restaurant.numGuest ?? 10;
+console.log(guestCorrect);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+/*
+//-- SHORT CIRCUITING - HIỆN TƯỢNG ĐOẢN MẠCH --
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+console.log("-----OR-----");
 //Use ANY data type, retrun ANY data type, short-circuiting
 console.log(3 || "Jonas"); // 3
 
@@ -58,6 +145,27 @@ console.log(true || 0); // true
 console.log(undefined || null); // null
 
 console.log(undefined || 0 || "" || "Hello" || 23 || null); // Hello
+
+restaurant.numGuest = 23;
+const guest1 = restaurant.numGuest ? restaurant.numGuest : 10; // nếu numGuest tồn tại, giá trị của guest1 = numGuest; ngược lại = 10;
+console.log(guest1); // 23
+
+const guest2 = restaurant.numGuest || 10; // nếu restaurant.numGuest ko có giá trị, guest2 = 10; và ngược lại
+console.log(guest2);
+console.log("-----AND-----"); // toán tử AND sẽ trả về giá trị cuối cùng của phép toán, nếu giá trị đầu là sai, mọi giá trị còn lại đều vô nghĩa
+console.log(0 && "Jonas"); // 0
+console.log(7 && "Jonas"); // Jonas
+console.log("Hello" && 23 && null && "Jonas"); // null
+
+// Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza("mushrooms", "spinach");
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
 
 /*
 
@@ -106,7 +214,7 @@ restaurant.orderPizza("mushrooms"); // 1 mảng rỗng
 */
 
 /*
--- SPREAD OPERATOR --
+//-- SPREAD OPERATOR --
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const arr = [7, 8, 9];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -155,7 +263,7 @@ console.log(restaurantCopy.name);
 */
 
 /* 
--- DETRUCTORING ARRAYS --
+//-- DETRUCTORING OBJECT --
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 restaurant.orderDelivery({
   time: "22:30",
@@ -200,7 +308,7 @@ console.log(o, c);
 */
 
 /* 
--- DETRUCTORING OBJECTS --
+//-- DESTRUCTORING ARRAYS --
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const arr = [2, 3, 4];
 const a = arr[0];
