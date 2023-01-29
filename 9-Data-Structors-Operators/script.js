@@ -52,14 +52,85 @@ const restaurant = {
   },
 };
 
+const rest = new Map();
+rest.set("name", "Classico Italiano");
+rest.set(1, "Firenze, Italy");
+rest.set(2, "Lisbon, Portugal");
+console.log(rest);
+
+rest
+  .set("categories", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "We are open :D")
+  .set(false, "We are close :(");
+
+console.log(rest.get("name")); // Classico Italiano
+console.log(rest.get(true)); // We are open :D
+console.log(rest.get(1)); // Firenze, Italy
+
+const time = 8;
+console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+console.log(rest.get(true && true)); // giống câu trên
+console.log(rest.get(false && false));
+
+console.log(rest.has("categories")); //true
+rest.delete(2);
+console.log(rest);
+console.log(rest.size);
+
+rest.set([1, 2], "Test");
+
+/*
+///////////////////////////////////////////////////////////////////////////////////////////////
+const ordersSet = new Set([
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Risotto",
+  "Pasta",
+  "Pizza",
+]);
+
+console.log(ordersSet); // 6 món nhưng trả về 3, loại bỏ dulicater
+
+console.log(new Set("Nghia")); // trả về từng kí tự
+
+console.log(ordersSet.size); // trả về size sau khi loại bỏ duplicater
+
+console.log(ordersSet.has("Pizza")); //true
+
+console.log(ordersSet.has("Bread")); //false
+
+ordersSet.add("Garlic Bread");
+
+console.log(ordersSet); // add Garlic Bread
+
+ordersSet.delete("Risotto"); // .clear = delete all
+
+console.log(ordersSet); // delete Risotto
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = ["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"];
+const positions = [...new Set(staff)]; //[...] chuyển thành 1 array
+console.log(positions);
+console.log(
+  new Set(["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"]).size
+);
+///////////////////////////////////////////////////////////////////////////////////////////////
+ */
+
+/*
+// Property VALUES
+///////////////////////////////////////////////////////////////////////////////////////////////
 const properties = Object.keys(openingHours); // keys: trả về giá trị là tên của array trong object
 console.log(properties); // Mảng chứa 3 phần tử
 
 for (const day of Object.keys(openingHours)) {
   console.log(day);
 }
-
-// Property VALUES
 const values = Object.values(openingHours); // values: trả về giá trị là các phần tử trong array
 console.log(values);
 
@@ -70,8 +141,12 @@ console.log(entries);
 for (const [key, { open, close }] of entries) {
   console.log(`In ${key}day we open at ${open} to ${close} `);
 }
+///////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
 /*
 //OPTIONAL CHAINING
+///////////////////////////////////////////////////////////////////////////////////////////////
 if (restaurant.openingHours.mon) {
   console.log(console.log(restaurant.openingHours.mon));
 }
@@ -96,7 +171,7 @@ console.log(restaurant.orderABC?.(0, 1) ?? "Method does not exist"); // method d
 const users = [{ name: "Jonas", email: "hello@jonas.io" }];
 
 console.log(users[0]?.name ?? "User array empty!"); //Check xem mảng có phần tử ko?
-
+///////////////////////////////////////////////////////////////////////////////////////////////
 */
 
 /* 
