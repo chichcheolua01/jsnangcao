@@ -46,19 +46,58 @@ const restaurant = {
   },
 
   orderPizza(mainIngredient, ...otherIngredients) {
-    // nếu chúng ta có nhiều hơn 1 phần tử, phần tử đầu tiên sẽ là main, còn lại là ọthers
+    // nếu chúng ta có nhiều hơn 1 phần tử, phần tử đầu tiên sẽ là main, còn lại là others
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
 };
 
+const properties = Object.keys(openingHours); // keys: trả về giá trị là tên của array trong object
+console.log(properties); // Mảng chứa 3 phần tử
+
+for (const day of Object.keys(openingHours)) {
+  console.log(day);
+}
+
+// Property VALUES
+const values = Object.values(openingHours); // values: trả về giá trị là các phần tử trong array
+console.log(values);
+
+// Entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`In ${key}day we open at ${open} to ${close} `);
+}
+/*
 //OPTIONAL CHAINING
 if (restaurant.openingHours.mon) {
   console.log(console.log(restaurant.openingHours.mon));
 }
 
 //WITH optinal chaining
-console.log(restaurant.openingHours.mon?.open); //? kiểm tra rằng phía trước ? có tồn tại hay ko
+console.log(restaurant.openingHours?.mon?.open); //? kiểm tra rằng phía trước ? có tồn tại hay ko
+
+// Example
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+for (const day of days) {
+  //console.log(day);
+  const openHour = restaurant.openingHours[day]?.open ?? "closed"; // Nullish operator ?? nhận giá trị 0
+  console.log(`On ${day} we're open at ${openHour}`);
+}
+
+// Methods
+
+console.log(restaurant.order?.(0, 1) ?? "Method does not exist"); // ?. để check xem method có tồn tại hay ko, sau đó thêm tham số sau dấu .
+console.log(restaurant.orderABC?.(0, 1) ?? "Method does not exist"); // method does not exist
+
+//Arrays
+const users = [{ name: "Jonas", email: "hello@jonas.io" }];
+
+console.log(users[0]?.name ?? "User array empty!"); //Check xem mảng có phần tử ko?
+
+*/
 
 /* 
 //-- FOR LOOP AND ENTRIES --
