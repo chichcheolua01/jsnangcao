@@ -52,6 +52,53 @@ const restaurant = {
   },
 };
 
+/*
+// -- MAP --
+///////////////////////////////////////////////////////////////////////////////////////////////
+const question = new Map([
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "Javascript"],
+  ["correct", 3],
+  [true, "Correct 🥇"],
+  [false, "Try again!"],
+]);
+
+console.log(question);
+
+// Convert object to map
+
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours)); // tạo ra Map từ Object có sẵn
+console.log(hoursMap);
+
+console.log(question.get("question"));
+for (const [key, value] of question) {
+  if (typeof key === "number") {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+const answer = Number(prompt("Your answer"));
+console.log(answer);
+// const correctAnswer = question.get("correct");
+// if (answer == correctAnswer) {
+//   console.log(question.get(true));
+// } else {
+//   console.log(question.get(false));
+// }
+
+console.log(question.get(question.get("correct") == answer)); // question.get("correct") == answer = true
+
+// Convert map to array
+console.log([...question]); // Map to array
+///////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+/*
+// -- MAP --
+///////////////////////////////////////////////////////////////////////////////////////////////
 const rest = new Map();
 rest.set("name", "Classico Italiano");
 rest.set(1, "Firenze, Italy");
@@ -78,10 +125,11 @@ console.log(rest.has("categories")); //true
 rest.delete(2);
 console.log(rest);
 console.log(rest.size);
-
-rest.set([1, 2], "Test");
+///////////////////////////////////////////////////////////////////////////////////////////////
+*/
 
 /*
+// -- SET --
 ///////////////////////////////////////////////////////////////////////////////////////////////
 const ordersSet = new Set([
   "Pasta",
